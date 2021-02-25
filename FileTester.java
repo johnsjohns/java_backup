@@ -5,8 +5,11 @@ class FileTester {
     public static void main(String[] args){
         File file = new File("arquivo.txt");
         try{
-        file.createNewFile();
-        } catch (IOException e){}
+            System.out.println(file.createNewFile()? "Arquivo criado":"Arquivo ja exite");
+            
+        } catch (IOException e){
+            
+        }
         System.out.println(file.getAbsolutePath());
     }
 }
