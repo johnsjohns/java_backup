@@ -22,13 +22,15 @@ class FileTester {
             System.out.println(arq);
         }
 
-        File source = new File("temp/2.txt");
+        System.out.println(File.separator);
+
+        File source = new File("temp" + File.separator + "2.txt");
         try {
-            FileUtils.copyFile(source, new File("temp2/2.txt"));
+            FileUtils.copyFile(source, new File("temp2" +File.separator + "2.txt"));
         } catch (IOException e){
             e.printStackTrace();
             System.out.println(e.getLocalizedMessage());
         }
-        System.out.println(File.separator);
+        
     }
 }
