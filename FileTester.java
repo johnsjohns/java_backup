@@ -1,36 +1,35 @@
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
-
-
 
 class FileTester {
     public static void main(String[] args){
         File file = new File("temp");
-        System.out.println(file.isDirectory()? "verdadeiro":"falso");
-        System.out.println("absolute path: " + file.getAbsolutePath());
-        System.out.println("path: " + file.getPath());
-        try{
-            System.out.println("canonical path: " + file.getCanonicalPath());
-        } catch(Exception e){
+        listar(file);     
+    }
 
-        }
-        System.out.println("Parent path: " + file.getParent());
-        String arquivos[] = file.list();
-        for (String arq : arquivos){
-            System.out.println(arq);
-        }
 
-        System.out.println(File.separator);
-
-        File source = new File("temp" + File.separator + "2.txt");
-        try {
-            FileUtils.copyFile(source, new File("temp2" +File.separator + "2.txt"));
-        } catch (IOException e){
-            e.printStackTrace();
-            System.out.println(e.getLocalizedMessage());
-        }
+    static public void listar(File arquivo){
+        File destino = new File("temp2");
+        String caminho = destino.getAbsolutePath();
+        String barra = File.separator;
         
+        File arquivos[] = arquivo.listFiles();
+        for (File arq : arquivos){
+             
+            if(arq.isDirectory()){
+                System.out.println(arq.getAbsolutePath());
+                listar(arq);
+            }else{
+                System.out.println(arq.getAbsolutePath());
+                File novo = new File(caminho + barra + arq.getPath());
+                try{
+                FileUtils.copyFile(arq, novo);
+                } catch (IOException e){
+                    System.out.println("FUdeu");
+                }
+            }
+            Delay.delay(50);
+        }
     }
 }
