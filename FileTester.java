@@ -3,6 +3,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 
+
+
 class FileTester {
     public static void main(String[] args){
         File file = new File("temp");
@@ -24,7 +26,8 @@ class FileTester {
         try {
             FileUtils.copyFile(source, new File("temp2/1.txt"));
         } catch (IOException e){
-            
+            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         }
     }
 }
