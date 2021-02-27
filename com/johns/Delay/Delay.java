@@ -1,4 +1,4 @@
-package com.johns.backup;
+package com.johns.Delay;
 
 public class Delay {
     static public void delay(int time){
