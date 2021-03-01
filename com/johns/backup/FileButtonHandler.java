@@ -16,6 +16,7 @@ public class FileButtonHandler implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand() == "Procurar"){
             JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = chooser.showOpenDialog(painel);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = chooser.getSelectedFile();
