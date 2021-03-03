@@ -34,7 +34,8 @@ public class ModelTabel extends AbstractTableModel {
     }
 
     public void insertRow(String nomeDiretorio) {
-        int index = modelRows.size() + 1;
+        Item item = modelRows.get(modelRows.size());
+        int index = item.getIndex() + 1;
         modelRows.add(new Item(index, nomeDiretorio));
         fireTableCellUpdated(index, 0);
         fireTableCellUpdated(index, 1);
