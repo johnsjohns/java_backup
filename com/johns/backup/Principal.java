@@ -16,7 +16,7 @@ import java.awt.FlowLayout;
 public class Principal extends JPanel {
     private JLabel lblCaminho;
     private JTextField txtCaminho;
-    private JButton btnCaminho, btnAdd;
+    private JButton btnCaminho, btnAdd, btnBackup;
     private JTable tabela;
     private ModelTabel modelo;
     private JScrollPane sPainel;
@@ -33,14 +33,22 @@ public class Principal extends JPanel {
         pnlCaminho.add(btnAdd);
         pnlCaminho.setMaximumSize(new Dimension(100, 1000));
 
+        btnBackup = new JButton("BackUp");
+
+        JPanel painelBackup = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        painelBackup.add(btnBackup);
+
         modelo = new ModelTabel();
         tabela = new JTable(modelo);
         tabela.getColumnModel().getColumn(0).setMaxWidth(40);
         setLayout(new BorderLayout());
+
         add(pnlCaminho, BorderLayout.NORTH);
         sPainel = new JScrollPane(tabela);
         add(sPainel, BorderLayout.CENTER);
+        add(painelBackup, BorderLayout.SOUTH);
         FileButtonHandler bt = new FileButtonHandler(this);
+
         btnCaminho.addActionListener(bt);
         btnAdd.addActionListener(bt);
     }
