@@ -6,7 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+
+import com.johns.backup.table.ModelTabel;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 public class Principal extends JPanel {
@@ -14,6 +18,8 @@ public class Principal extends JPanel {
     private JTextField txtCaminho;
     private JButton btnCaminho, btnAdd;
     private JTable tabela;
+    private ModelTabel modelo;
+    private JScrollPane sPainel;
 
     public Principal() {
         lblCaminho = new JLabel("Diretorio");
@@ -25,20 +31,33 @@ public class Principal extends JPanel {
         pnlCaminho.add(txtCaminho);
         pnlCaminho.add(btnCaminho);
         pnlCaminho.add(btnAdd);
-        String colunas[] = { "caminho" };
-        String dados[][] = { { "diretorio1" }, { "diretorio2" } };
+        pnlCaminho.setMaximumSize(new Dimension(100, 1000));
 
-        tabela = new JTable(dados, colunas);
-
+        modelo = new ModelTabel();
+        tabela = new JTable(modelo);
+        tabela.getColumnModel().getColumn(0).setMaxWidth(40);
         setLayout(new BorderLayout());
-        add(pnlCaminho, BorderLayout.CENTER);
-        JScrollPane sPainel = new JScrollPane(tabela);
-        add(sPainel, BorderLayout.SOUTH);
+        add(pnlCaminho, BorderLayout.NORTH);
+        sPainel = new JScrollPane(tabela);
+        add(sPainel, BorderLayout.CENTER);
         FileButtonHandler bt = new FileButtonHandler(this);
         btnCaminho.addActionListener(bt);
+        btnAdd.addActionListener(bt);
     }
 
     public void setTxt(String caminho) {
         txtCaminho.setText(caminho);
+    }
+
+    public String getTxt() {
+        return txtCaminho.getText();
+    }
+
+    public void addCaminho(String caminho) {
+        if (!modelo.exists(caminho)) {
+            modelo.insertRow(caminho);
+            sPainel.setViewportView(tabela);
+        }
+
     }
 }

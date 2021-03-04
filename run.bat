@@ -1,1 +1,1 @@
-java -cp commons-io-2.8.0.jar; com.johns.backup.FileTester
+java -cp commons-io-2.8.0.jar; com.johns.backup.Tela
