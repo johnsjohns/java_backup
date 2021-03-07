@@ -1,4 +1,4 @@
-package com.johns.backup.table;
+package com.johns.backup.gui.table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +30,14 @@ public class ModelTabel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Item item = modelRows.get(rowIndex);
         switch (columnIndex) {
-            case 0:
-                return item.getIndex();
-            // break;
-            case 1:
-                return item.getDiretorio();
-            // break;
-            default:
-                return -1;
+        case 0:
+            return item.getIndex();
+        // break;
+        case 1:
+            return item.getDiretorio();
+        // break;
+        default:
+            return -1;
         }
     }
 
@@ -92,4 +92,7 @@ public class ModelTabel extends AbstractTableModel {
         return existe;
     }
 
+    public List<Item> getItens() {
+        return modelRows;
+    }
 }

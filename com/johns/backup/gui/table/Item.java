@@ -1,4 +1,4 @@
-package com.johns.backup.table;
+package com.johns.backup.gui.table;
 
 public class Item {
     private String diretorio;

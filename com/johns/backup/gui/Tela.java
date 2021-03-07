@@ -1,4 +1,4 @@
-package com.johns.backup;
+package com.johns.backup.gui;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
