@@ -99,10 +99,8 @@ public class Principal extends JPanel {
         }
     }
 
-    public void setProgresso() {
-        incrementa++;
-        progress.setValue(incrementa);
-        Delay.delay(100);
+    public JProgressBar getProgresso() {
+        return progress;
 
     }
 
@@ -110,7 +108,7 @@ public class Principal extends JPanel {
         txtDestino.setText(destin);
     }
 
-    public List<Item> getItems() {
+    public List<Item> getItens() {
         return modelo.getItens();
     }
 

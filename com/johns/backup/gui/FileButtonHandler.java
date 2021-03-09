@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 import com.johns.Delay.Delay;
+import com.johns.backup.JBackup;
 import com.johns.backup.gui.table.Item;
 
 public class FileButtonHandler implements ActionListener {
@@ -42,14 +43,9 @@ public class FileButtonHandler implements ActionListener {
 
         case "BackUp":
             File destino = new File(painel.getTxtCaminho());
-            List<Item> items = new ArrayList<Item>(painel.getItems());
-
-            Thread t1 = new Thread(new Runnable() {
-                public void run() {
-                    for (int a = 0; a < 100; a++)
-                        painel.setProgresso();
-                }
-            });
+            List<Item> items = new ArrayList<Item>(painel.getItens());
+            JBackup backup = new JBackup(items, destino, painel.getProgresso());
+            Thread t1 = new Thread(backup);
             t1.start();
             break;
 
