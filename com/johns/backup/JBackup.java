@@ -23,6 +23,8 @@ public class JBackup implements Runnable {
 
     public void run() {
         progress.setMaximum(getTotal());
+        System.out.println(getTotal());
+        System.out.println(itens.size());
         /*
          * for (Item item : itens) { File arq = new File(item.getDiretorio());
          * copiar(arq); }
@@ -65,15 +67,19 @@ public class JBackup implements Runnable {
 
     private List<String> listar(File arq) {
         List<String> arquivos = new ArrayList<String>();
-        System.out.println("arq.getPath()");
-        // String caminho = destino.getAbsolutePath();
-        // String barra = File.separator;
-        if (arq.isDirectory()) {
-            // arquivos.addAll(listar(arq));
-        } else {
-            System.out.println("iuia");
-            // arquivos.add(caminho + barra + arq.getName());
+        System.out.println(arq.getPath());
+        String caminho = destino.getAbsolutePath();
+        String barra = File.separator;
+        File arqs[] = arq.listFiles();
+        for(File arq_tem : arqs){
+            if(arq_tem.isDirectory()){
+                arquivos.addAll(listar(arq_tem));
+            } else {
+                arquivos.add(caminho + barra + arq.getName());
+                System.out.println(caminho + barra + arq.getName());
+            }
         }
+
         return arquivos;
     }
 }
