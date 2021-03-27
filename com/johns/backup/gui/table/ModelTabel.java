@@ -95,4 +95,9 @@ public class ModelTabel extends AbstractTableModel {
     public List<Item> getItens() {
         return modelRows;
     }
+
+    public void removeItem(int index){
+        modelRows.remove(index);
+        fireTableRowsDeleted(0, modelRows.size());
+    }
 }

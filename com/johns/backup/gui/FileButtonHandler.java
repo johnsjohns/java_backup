@@ -16,7 +16,7 @@ import com.johns.backup.gui.table.Item;
 public class FileButtonHandler implements ActionListener {
     private Principal painel;
 
-    public FileButtonHandler(Principal painel) {
+    public FileButtonHandler(Principal painel){
         this.painel = painel;
     }
 
@@ -57,8 +57,14 @@ public class FileButtonHandler implements ActionListener {
                 File file = DestinChooser.getSelectedFile();
                 painel.setTxtDestino(file.getAbsolutePath());
             }
-            ;
             break;
+        case "-":
+            painel.removeItem();
+            break;
+
+
+
+
 
         }
 

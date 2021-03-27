@@ -20,7 +20,7 @@ import java.util.List;
 public class Principal extends JPanel {
     private JLabel lblCaminho, lblDestino;
     private JTextField txtCaminho, txtDestino;
-    private JButton btnCaminho, btnAdd, btnBackup, btnDestino;
+    private JButton btnCaminho, btnAdd, btnBackup, btnDestino, btnRemove;
     private JTable tabela;
     private ModelTabel modelo;
     private JScrollPane sPainel;
@@ -32,11 +32,13 @@ public class Principal extends JPanel {
         txtCaminho = new JTextField("", 40);
         btnCaminho = new JButton("Procurar");
         btnAdd = new JButton("+");
+        btnRemove = new JButton("-");
         JPanel pnlCaminho = new JPanel(new FlowLayout());
         pnlCaminho.add(lblCaminho);
         pnlCaminho.add(txtCaminho);
         pnlCaminho.add(btnCaminho);
         pnlCaminho.add(btnAdd);
+        pnlCaminho.add(btnRemove);
         pnlCaminho.setMaximumSize(new Dimension(100, 1000));
         incrementa = 0;
 
@@ -78,6 +80,7 @@ public class Principal extends JPanel {
         btnAdd.addActionListener(bt);
         btnBackup.addActionListener(bt);
         btnDestino.addActionListener(bt);
+        btnRemove.addActionListener(bt);
     }
 
     public void setTxt(String caminho) {
@@ -105,11 +108,17 @@ public class Principal extends JPanel {
     }
 
     public void setTxtDestino(String destin) {
+
         txtDestino.setText(destin);
     }
 
     public List<Item> getItens() {
+
         return modelo.getItens();
+    }
+
+    public void removeItem (){
+        modelo.removeItem(tabela.getSelectedRow());
     }
 
 }
