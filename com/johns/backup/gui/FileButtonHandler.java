@@ -32,9 +32,6 @@ public class FileButtonHandler implements ActionListener {
                 File file = chooser.getSelectedFile();
                 painel.setTxt(file.getAbsolutePath());
             }
-            break;
-
-        case "+":
             String caminho = painel.getTxt().trim();
             if (!caminho.equals("")) {
                 painel.addCaminho(caminho);
