@@ -14,9 +14,7 @@ import com.johns.backup.Gravador;
 import com.johns.backup.gui.table.Item;
 import com.johns.backup.gui.table.ModelTabel;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -46,7 +44,10 @@ public class Principal extends JPanel {
 
         btnDestino = new JButton("Destino");
         lblDestino = new JLabel("Destino");
-        txtDestino = new JTextField("", 10);
+        txtDestino = new JTextField("", 30);
+        Font font1 = new Font("SansSerif", Font.TRUETYPE_FONT, 10);
+        txtDestino.setFont(font1);
+
 
         JPanel painelDestino = new JPanel(new FlowLayout(FlowLayout.LEFT));
         painelDestino.add(lblDestino);
