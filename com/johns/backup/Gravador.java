@@ -15,21 +15,16 @@ public class Gravador {
     List<String> lista;
 
     public Gravador(){
-        file = new File("temp");
+        file = new File("./com/johns/tempo.dir");
+
         lista = new ArrayList<String>();
         try {
+            if(!file.exists()){
+                file.createNewFile();
+            }
             lista.addAll(FileUtils.readLines(file, StandardCharsets.UTF_8));
         } catch (IOException e) {
             System.out.println("Arquivo não encontrado\n" + e);
-        }
-    }
-
-    public static void main(String args[]){
-        Gravador  grava = new Gravador();
-        try {
-            grava.gravar("2");
-        } catch (IOException e){
-            e.printStackTrace();
         }
     }
 
@@ -45,6 +40,14 @@ public class Gravador {
             FileUtils.writeLines(file, lista);
         }
 
+    }
+
+    public List<String> getLista(){
+        return lista;
+    }
+
+    public void limpar(){
+        lista.removeAll(lista);
     }
 
 }

@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 import com.johns.Delay.Delay;
+import com.johns.Propriedades;
 import com.johns.backup.JBackup;
 import com.johns.backup.gui.table.Item;
 
@@ -53,6 +54,8 @@ public class FileButtonHandler implements ActionListener {
             if (returnDest == JFileChooser.APPROVE_OPTION) {
                 File file = DestinChooser.getSelectedFile();
                 painel.setTxtDestino(file.getAbsolutePath());
+                Propriedades prop = new Propriedades();
+                prop.setProp("diretorio", file.getAbsolutePath());
             }
             break;
         case "-":

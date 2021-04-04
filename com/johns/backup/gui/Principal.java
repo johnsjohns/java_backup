@@ -9,12 +9,15 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.johns.Delay.Delay;
+import com.johns.Propriedades;
+import com.johns.backup.Gravador;
 import com.johns.backup.gui.table.Item;
 import com.johns.backup.gui.table.ModelTabel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.IOException;
 import java.util.List;
 
 public class Principal extends JPanel {
@@ -26,6 +29,7 @@ public class Principal extends JPanel {
     private JScrollPane sPainel;
     private JProgressBar progress;
     private int incrementa;
+
 
     public Principal() {
         lblCaminho = new JLabel("Diretorio");
@@ -78,6 +82,7 @@ public class Principal extends JPanel {
         btnBackup.addActionListener(bt);
         btnDestino.addActionListener(bt);
         btnRemove.addActionListener(bt);
+        lerArquivoLista();
     }
 
     public void setTxt(String caminho) {
@@ -96,6 +101,17 @@ public class Principal extends JPanel {
         if (!modelo.exists(caminho)) {
             modelo.insertRow(caminho);
             sPainel.setViewportView(tabela);
+            Gravador gravador = new Gravador();
+            List<Item> itemGravar = modelo.getItens();
+            gravador.limpar();;
+            for(Item itemTemp : itemGravar){
+                try {
+                    gravador.gravar(itemTemp.getDiretorio());
+                } catch (IOException e){
+                    System.out.println("Nao foi possivel gente");
+                }
+            }
+
         }
     }
 
@@ -117,6 +133,31 @@ public class Principal extends JPanel {
     public void removeItem (){
         if(tabela.getSelectedRow() >= 0) {
             modelo.removeItem(tabela.getSelectedRow());
+        }
+        gravar();
+    }
+
+    private void lerArquivoLista(){
+        Gravador gravador = new Gravador();
+        List<String> lista = gravador.getLista();
+        for(String item : lista){
+            modelo.insertRow(item);
+        }
+
+        Propriedades prop = new Propriedades();
+        setTxtDestino(prop.getProp("diretorio"));
+    }
+
+    private void gravar(){
+        Gravador gravador = new Gravador();
+        List<Item> itemGravar = modelo.getItens();
+        gravador.limpar();;
+        for(Item itemTemp : itemGravar){
+            try {
+                gravador.gravar(itemTemp.getDiretorio());
+            } catch (IOException e){
+                System.out.println("Nao foi possivel gente");
+            }
         }
     }
 
