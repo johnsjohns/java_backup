@@ -40,7 +40,7 @@ public class FileButtonHandler implements ActionListener {
             break;
 
         case "BackUp":
-            File destino = new File(painel.getTxtCaminho());
+            File destino = new File(painel.getTxtDestino());
             List<Item> items = new ArrayList<Item>(painel.getItens());
             JBackup backup = new JBackup(items, destino, painel.getProgresso());
             Thread t1 = new Thread(backup);

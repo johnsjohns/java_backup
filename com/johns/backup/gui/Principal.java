@@ -125,6 +125,10 @@ public class Principal extends JPanel {
         txtDestino.setText(destin);
     }
 
+    public String getTxtDestino() {
+        return txtDestino.getText();
+    }
+
     public List<Item> getItens() {
 
         return modelo.getItens();

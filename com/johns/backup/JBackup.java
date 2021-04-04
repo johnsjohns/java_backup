@@ -23,35 +23,40 @@ public class JBackup implements Runnable {
 
     public void run() {
         progress.setMaximum(getTotal());
-        System.out.println(getTotal());
-        System.out.println(itens.size());
-        /*
-         * for (Item item : itens) { File arq = new File(item.getDiretorio());
-         * copiar(arq); }
-         */
+
+        for (Item item : itens) { File arq = new File(item.getDiretorio());
+        copiar(arq, destino.getPath());
+        }
+
 
     }
 
-    private void copiar(File arq) {
+    private void copiar(File arq, String dest ) {
 
-        String caminho = destino.getAbsolutePath();
+        String caminho = dest;
         String barra = File.separator;
-        if (arq.isDirectory()) {
-            copiar(arq);
-        } else {
-            File novo = new File(caminho + barra + arq.getPath());
-            try {
-                FileUtils.copyFile(arq, novo);
-                Thread update = new Thread(new Runnable() {
-                    public void run() {
+        File arqs[] = arq.listFiles();
+        for(File arq_temp : arqs){
+            if (arq_temp.isDirectory()) {
+                copiar(arq_temp, caminho +barra+ arq_temp.getName());
+            } else {
+
+                File novo = new File(caminho + barra + arq_temp.getName());
+                try {
+                    FileUtils.copyFile(arq_temp, novo);
+                    Thread update = new Thread(new Runnable() {
+                        public void run() {
                         progress.setValue(progress.getValue() + 1);
                     }
-                });
-                update.start();
-            } catch (IOException e) {
-                System.out.println("FUdeu");
+                    });
+                    update.start();
+                } catch (IOException e) {
+                    System.out.println("FUdeu");
+                    e.printStackTrace();
+                }
             }
         }
+
 
     }
 
@@ -59,24 +64,24 @@ public class JBackup implements Runnable {
         int total = 0;
         for (Item item : itens) {
             File arq = new File(item.getDiretorio());
-            total += listar(arq).size();
+            total += listar(arq, arq.getAbsolutePath()).size();
 
         }
+
         return total;
     }
 
-    private List<String> listar(File arq) {
+    private List<String> listar(File arq, String dest) {
         List<String> arquivos = new ArrayList<String>();
-        System.out.println(arq.getPath());
-        String caminho = destino.getAbsolutePath();
+        String caminho = dest;
         String barra = File.separator;
         File arqs[] = arq.listFiles();
         for(File arq_tem : arqs){
             if(arq_tem.isDirectory()){
-                arquivos.addAll(listar(arq_tem));
+                arquivos.addAll(listar(arq_tem, caminho + barra + arq_tem.getName()));
             } else {
                 arquivos.add(caminho + barra + arq.getName());
-                System.out.println(caminho + barra + arq.getName());
+
             }
         }
 
