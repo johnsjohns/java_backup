@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JProgressBar;
 
 import com.johns.Delay.Delay;
+import com.johns.log.Log;
 import org.apache.commons.io.FileUtils;
 import com.johns.backup.gui.table.Item;
 
@@ -52,8 +53,7 @@ public class JBackup implements Runnable {
                     });
                     update.start();
                 } catch (IOException e) {
-                    System.out.println("FUdeu");
-                    e.printStackTrace();
+                    Log.gravar("JBackup: Erro ao copiar " + e);
                 }
 
             }

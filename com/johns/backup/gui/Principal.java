@@ -13,6 +13,7 @@ import com.johns.Propriedades;
 import com.johns.backup.Gravador;
 import com.johns.backup.gui.table.Item;
 import com.johns.backup.gui.table.ModelTabel;
+import com.johns.log.Log;
 
 import java.awt.*;
 import java.io.IOException;
@@ -109,7 +110,7 @@ public class Principal extends JPanel {
                 try {
                     gravador.gravar(itemTemp.getDiretorio());
                 } catch (IOException e){
-                    System.out.println("Nao foi possivel gente");
+                    Log.gravar("Principal: nao voi possivel gravar caminho");
                 }
             }
 
@@ -161,7 +162,7 @@ public class Principal extends JPanel {
             try {
                 gravador.gravar(itemTemp.getDiretorio());
             } catch (IOException e){
-                System.out.println("Nao foi possivel gente");
+                Log.gravar("Principal: Nao foi possivel gravar caminho no arquivo " + e);
             }
         }
     }
