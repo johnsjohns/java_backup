@@ -73,9 +73,8 @@ public class JBackup implements Runnable {
         return total;
     }
 
-    private List<String> listar(File arq, String Caminho) {
+    private List<String> listar(File arq, String caminho) {
         List<String> arquivos = new ArrayList<String>();
-        String caminho = dest;
         File arqs[] = arq.listFiles();
         for(File arq_tem : arqs){
             if(arq_tem.isDirectory()){
