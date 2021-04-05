@@ -1,5 +1,7 @@
 package com.johns;
 
+import com.johns.log.Log;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,8 +18,7 @@ public class Propriedades {
             FileReader reader = new FileReader("./com/johns/prop.props");
             prop.load(reader);
         } catch (IOException e){
-            System.out.println("Não foi possivel carregar propriedades");
-
+            Log.gravar("Prop: Não foi possivel carregar propriedades " + e);
         }
 
 

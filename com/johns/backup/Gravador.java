@@ -1,5 +1,6 @@
 package com.johns.backup;
 
+import com.johns.log.Log;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -24,7 +25,7 @@ public class Gravador {
             }
             lista.addAll(FileUtils.readLines(file, StandardCharsets.UTF_8));
         } catch (IOException e) {
-            System.out.println("Arquivo não encontrado\n" + e);
+            Log.gravar("Arquivo não encontrado\n" + e);
         }
     }
 
@@ -43,10 +44,12 @@ public class Gravador {
     }
 
     public List<String> getLista(){
+
         return lista;
     }
 
     public void limpar(){
+
         lista.removeAll(lista);
     }
 
