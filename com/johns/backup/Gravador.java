@@ -15,7 +15,7 @@ public class Gravador {
     List<String> lista;
 
     public Gravador(){
-        file = new File("./com/johns/tempo.dir");
+        file = new File("./com/johns/temp.dir");
 
         lista = new ArrayList<String>();
         try {
