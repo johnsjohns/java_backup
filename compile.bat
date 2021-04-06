@@ -1,1 +1,1 @@
-javac -cp ;commons-io-2.8.0.jar; com\johns\backup\gui\Tela.java
+javac -cp ;commons-io-2.8.0.jar;  -verbose -encoding UTF-8 com\johns\backup\gui\Tela.java
