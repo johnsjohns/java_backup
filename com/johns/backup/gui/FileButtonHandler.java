@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import com.johns.Delay.Delay;
 import com.johns.Propriedades;
+import com.johns.backup.Gravador;
 import com.johns.backup.JBackup;
 import com.johns.backup.gui.table.Item;
 
@@ -27,6 +28,13 @@ public class FileButtonHandler implements ActionListener {
 
         case "Procurar":
             JFileChooser chooser = new JFileChooser();
+            Gravador gravador = new Gravador();
+            List<String> lista_arq= gravador.getLista();
+            if(lista_arq.size() == 0){
+                chooser.setCurrentDirectory(new File("./"));
+            } else {
+                chooser.setCurrentDirectory(new File(lista_arq.get(lista_arq.size() -1)));
+            }
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             int returnVal = chooser.showOpenDialog(painel);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -48,11 +56,18 @@ public class FileButtonHandler implements ActionListener {
             break;
 
         case "Destino":
-            JFileChooser DestinChooser = new JFileChooser();
-            DestinChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            int returnDest = DestinChooser.showOpenDialog(painel);
+            JFileChooser destinChooser = new JFileChooser();
+            String dirAntes = painel.getTxtDestino();
+            dirAntes.trim();
+            if(dirAntes.equals("")){
+                destinChooser.setCurrentDirectory(new File("./"));
+            } else {
+                destinChooser.setCurrentDirectory(new File(dirAntes));
+            }
+            destinChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnDest = destinChooser.showOpenDialog(painel);
             if (returnDest == JFileChooser.APPROVE_OPTION) {
-                File file = DestinChooser.getSelectedFile();
+                File file = destinChooser.getSelectedFile();
                 painel.setTxtDestino(file.getAbsolutePath());
                 Propriedades prop = new Propriedades();
                 prop.setProp("diretorio", file.getAbsolutePath());
