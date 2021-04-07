@@ -147,12 +147,14 @@ public class Principal extends JPanel {
     public void gravar(){
         Gravador gravador = new Gravador();
         List<Item> itemGravar = modelo.getItens();
-        gravador.limpar();;
-        for(Item itemTemp : itemGravar){
-            try {
-                gravador.gravar(itemTemp.getDiretorio());
-            } catch (IOException e){
-                Log.gravar("Principal: Nao foi possivel gravar caminho no arquivo " + e);
+        gravador.limpar();
+        if(itemGravar.size()>0){
+            for(Item itemTemp : itemGravar){
+                try {
+                    gravador.gravar(itemTemp.getDiretorio());
+                } catch (IOException e) {
+                    Log.gravar("Principal: Nao foi possivel gravar caminho no arquivo " + e);
+                }
             }
         }
     }

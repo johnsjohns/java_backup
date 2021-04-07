@@ -51,6 +51,11 @@ public class Gravador {
     public void limpar(){
 
         lista.removeAll(lista);
+        try {
+            gravar("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
