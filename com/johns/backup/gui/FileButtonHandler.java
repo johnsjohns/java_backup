@@ -69,8 +69,8 @@ public class FileButtonHandler implements ActionListener {
             if (returnDest == JFileChooser.APPROVE_OPTION) {
                 File file = destinChooser.getSelectedFile();
                 painel.setTxtDestino(file.getAbsolutePath());
-                Propriedades prop = new Propriedades();
-                prop.setProp("diretorio", file.getAbsolutePath());
+                //Propriedades prop = new Propriedades();
+                //prop.setProp("diretorio", file.getAbsolutePath());
             }
             break;
         case "-":

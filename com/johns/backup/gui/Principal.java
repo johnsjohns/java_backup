@@ -85,6 +85,7 @@ public class Principal extends JPanel {
         btnDestino.addActionListener(bt);
         btnRemove.addActionListener(bt);
         lerArquivoLista();
+
     }
 
     public void setTxt(String caminho) {
@@ -103,17 +104,6 @@ public class Principal extends JPanel {
         if (!modelo.exists(caminho)) {
             modelo.insertRow(caminho);
             sPainel.setViewportView(tabela);
-            Gravador gravador = new Gravador();
-            List<Item> itemGravar = modelo.getItens();
-            gravador.limpar();;
-            for(Item itemTemp : itemGravar){
-                try {
-                    gravador.gravar(itemTemp.getDiretorio());
-                } catch (IOException e){
-                    Log.gravar("Principal: nao voi possivel gravar caminho");
-                }
-            }
-
         }
     }
 
@@ -143,7 +133,7 @@ public class Principal extends JPanel {
         gravar();
     }
 
-    private void lerArquivoLista(){
+    public void lerArquivoLista(){
         Gravador gravador = new Gravador();
         List<String> lista = gravador.getLista();
         for(String item : lista){
@@ -154,15 +144,17 @@ public class Principal extends JPanel {
         setTxtDestino(prop.getProp("diretorio"));
     }
 
-    private void gravar(){
+    public void gravar(){
         Gravador gravador = new Gravador();
         List<Item> itemGravar = modelo.getItens();
-        gravador.limpar();;
-        for(Item itemTemp : itemGravar){
-            try {
-                gravador.gravar(itemTemp.getDiretorio());
-            } catch (IOException e){
-                Log.gravar("Principal: Nao foi possivel gravar caminho no arquivo " + e);
+        gravador.limpar();
+        if(itemGravar.size()>0){
+            for(Item itemTemp : itemGravar){
+                try {
+                    gravador.gravar(itemTemp.getDiretorio());
+                } catch (IOException e) {
+                    Log.gravar("Principal: Nao foi possivel gravar caminho no arquivo " + e);
+                }
             }
         }
     }
